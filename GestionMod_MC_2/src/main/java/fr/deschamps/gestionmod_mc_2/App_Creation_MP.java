@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import javax.swing.*;
@@ -20,12 +21,16 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import static fr.deschamps.gestionmod_mc_2.App_Selection_MP.copy;
+
 public class App_Creation_MP implements Initializable {
 
     @FXML
     public Label welcomeText;
     @FXML
     public Label afficheDossierSelectionner;
+    @FXML
+    public TextField nomMP;
 
     public javafx.scene.control.ListView<String> ListView;
 
@@ -64,7 +69,7 @@ public class App_Creation_MP implements Initializable {
             }
         }
         else {
-            welcomeText.setText("Ce repertoire n'existe pas !!! ");
+            welcomeText.setText("Répertoire vide ou inexistant !");
         }
         ListView.getItems().clear();
         ListView.getItems().addAll(listeTest);
@@ -78,8 +83,46 @@ public class App_Creation_MP implements Initializable {
         afficheDossierSelectionner.setText(dossierSelectionner);
     }
 
-    //cree un nouveau dossier avec les fichiers de mods dans le dossier mods_loader sans les supprimer
-    
+
+    //crée un dossier mods_loader avec nom
+    private void creerDossierModsLoader() {
+        if (nomMP.getText().equals("")) {
+            JOptionPane.showMessageDialog(new JFrame(), "Erreur : Nom du ModPack vide");
+        }else{
+            File file = new File(lienDossierModsLoader + nomMP.getText());
+            if (!file.exists()) {
+                if (file.mkdir()) {
+                    System.out.println("Dossier "+nomMP.getText()+" créé");
+                } else {
+                    System.out.println("Erreur lors de la création du dossier "+nomMP.getText());
+                }
+            }
+        }
+    }
+
+    //copie dossier mods dans le dossier nouveau dossier mods_loader
+    public void creationNouveauMP(ActionEvent event) {
+        JFrame jFrame = new JFrame();
+        int result = JOptionPane.showConfirmDialog(jFrame, "Voulez-vous créer un nouveau ModPack avec les fichiers présent dans mods ?");
+        if (result == 0) {
+            if (nomMP.getText().equals("")) {
+                JOptionPane.showMessageDialog(new JFrame(), "Erreur : Nom du ModPack vide");
+            }else {
+                creerDossierModsLoader();
+                this.event = event;
+                File src = new File(lienDossierMods);
+                File dest = new File(lienDossierModsLoader + nomMP.getText());
+                try {
+                    copy(src, dest);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                JOptionPane.showMessageDialog(jFrame, "Fait !");
+                nomMP.clear();
+            }
+
+        }
+    }
 
 
 

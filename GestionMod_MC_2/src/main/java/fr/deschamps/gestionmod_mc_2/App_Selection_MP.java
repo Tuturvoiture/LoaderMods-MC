@@ -39,7 +39,6 @@ public class App_Selection_MP implements Initializable {
         actualiseList();
         button2.setDisable(true);
         System.out.println("User : "+User);
-        System.out.println(lienDossierModsLoader);
     }
 
     public static void copy(File src, File dest) throws IOException {
@@ -60,7 +59,7 @@ public class App_Selection_MP implements Initializable {
 
     public void deplaceFichier(ActionEvent event) {
         JFrame jFrame = new JFrame();
-        int result = JOptionPane.showConfirmDialog(jFrame, "Voulez-vous importer le ModPack "+dossierSelectionner+" ?\n(Cela entrainera la suppression des mots actuels)");
+        int result = JOptionPane.showConfirmDialog(jFrame, "<html>Voulez-vous importer le ModPack '"+dossierSelectionner+"' ?<html><html><font color='red'><br>(Cela entraînera la suppression du répertoire mods.)</font></html>");
 
         if (result == 0) {
             delete(lienDossierMods);
@@ -97,7 +96,7 @@ public class App_Selection_MP implements Initializable {
             }
         }
         else {
-            welcomeText.setText("Ce repertoire n'existe pas !!! ");
+            welcomeText.setText("Le repertoire 'mods_loaders' n'existe pas ou ne contient aucun ModPack !");
         }
         ListView.getItems().clear();
         ListView.getItems().addAll(listeTest);
