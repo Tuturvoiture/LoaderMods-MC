@@ -13,6 +13,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.InputStream;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import java.io.FileInputStream;
+import javafx.scene.Group;
+
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +37,8 @@ public class App_Creation_MP implements Initializable {
     public Label afficheDossierSelectionner;
     @FXML
     public TextField nomMP;
+    @FXML
+    public ImageView img;
 
     public javafx.scene.control.ListView<String> ListView;
 
@@ -45,6 +53,8 @@ public class App_Creation_MP implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         actualiseList();
+        Image image = new Image(getClass().getResource("/fr/deschamps/gestionmod_mc_2/images/giphy2.gif").toString());
+        img.setImage(image);
         System.out.println("User : "+User);
         System.out.println(lienDossierModsLoader);
     }
@@ -53,6 +63,7 @@ public class App_Creation_MP implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Accueil.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
+        stage.setTitle("Accueil");
         stage.setScene(scene);
         stage.show();
     }
@@ -87,7 +98,7 @@ public class App_Creation_MP implements Initializable {
     //crée un dossier mods_loader avec nom
     private void creerDossierModsLoader() {
         if (nomMP.getText().equals("")) {
-            JOptionPane.showMessageDialog(new JFrame(), "Erreur : Nom du ModPack vide");
+            JOptionPane.showMessageDialog(new JFrame(), "<html><font color='red'>Erreur : Nom du ModPack vide</font></html>");
         }else{
             File file = new File(lienDossierModsLoader + nomMP.getText());
             if (!file.exists()) {
@@ -106,7 +117,7 @@ public class App_Creation_MP implements Initializable {
         int result = JOptionPane.showConfirmDialog(jFrame, "Voulez-vous créer un nouveau ModPack avec les fichiers présent dans mods ?");
         if (result == 0) {
             if (nomMP.getText().equals("")) {
-                JOptionPane.showMessageDialog(new JFrame(), "Erreur : Nom du ModPack vide");
+                JOptionPane.showMessageDialog(new JFrame(), "<html><font color='red'>Erreur : Nom du ModPack vide</font></html>");
             }else {
                 creerDossierModsLoader();
                 this.event = event;
@@ -123,6 +134,8 @@ public class App_Creation_MP implements Initializable {
 
         }
     }
+
+
 
 
 

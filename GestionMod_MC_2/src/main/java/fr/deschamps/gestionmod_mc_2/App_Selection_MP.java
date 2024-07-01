@@ -10,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import javax.swing.*;
@@ -25,6 +27,9 @@ public class App_Selection_MP implements Initializable {
     public Label welcomeText;
     @FXML
     public Label afficheDossierSelectionner;
+    @FXML
+    public ImageView img;
+
     public javafx.scene.control.ListView<String> ListView;
     public Button button1;
     public Button button2;
@@ -37,6 +42,8 @@ public class App_Selection_MP implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         actualiseList();
+        Image image = new Image(getClass().getResource("/fr/deschamps/gestionmod_mc_2/images/giphy3.gif").toString());
+        img.setImage(image);
         button2.setDisable(true);
         System.out.println("User : "+User);
     }
@@ -53,6 +60,7 @@ public class App_Selection_MP implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Accueil.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
+        stage.setTitle("Accueil");
         stage.setScene(scene);
         stage.show();
     }
