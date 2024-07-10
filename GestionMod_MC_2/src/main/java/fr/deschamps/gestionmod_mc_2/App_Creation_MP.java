@@ -53,8 +53,7 @@ public class App_Creation_MP implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         actualiseList();
-        Image image = new Image(getClass().getResource("/fr/deschamps/gestionmod_mc_2/images/giphy2.gif").toString());
-        img.setImage(image);
+        Image image = new Image(getClass().getResource("/fr/deschamps/gestionmod_mc_2/images/giphy2.gif").toString());img.setImage(image);
         System.out.println("User : "+User);
         System.out.println(lienDossierModsLoader);
     }
