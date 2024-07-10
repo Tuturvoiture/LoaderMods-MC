@@ -8,10 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -45,10 +42,13 @@ public class App_Creation_MP implements Initializable {
     public ImageView img;
     @FXML
     public Pane paneCreation;
+    @FXML
+    public ProgressBar progressBar = new ProgressBar();;
 
 
 
     public javafx.scene.control.ListView<String> ListView;
+
 
     public Button button1;
     public Button button2;
@@ -86,12 +86,17 @@ public class App_Creation_MP implements Initializable {
         ArrayList<String> listeTest = new ArrayList<String>();
         File file = new File(lienDossierMods); File[] files = file.listFiles();
         if (files != null) {
-            welcomeText.setText("Voila les fichiers Mods trouvé(s)");
+            if (files.length > 1){
+                welcomeText.setText("Voila les Mods trouvés");
+            }else {
+                welcomeText.setText("Voila le Mod trouvé");
+            }
             for (int i = 0; i < files.length; i++) {
                 if (files[i].isFile() == true) {
                     listeTest.add("File : " + files[i].getName());
                 } //else {listeTest.add("Fichier : " + files[i].getName());}
             }
+
         }
         else {
             welcomeText.setText("Répertoire vide ou inexistant !");
@@ -119,7 +124,7 @@ public class App_Creation_MP implements Initializable {
         String user = User;
         List<String> lignes = Arrays.asList(nom, version, date.toString(), Integer.toString(nbMods), user);
         try {
-            File file = new File(lienDossierModsLoader + nom + "\\test.confml");
+            File file = new File(lienDossierModsLoader + nom + "\\"+nom+".confml");
             if (file.createNewFile()) {
                 System.out.println("Fichier créé : " + file.getName());
                 Files.write(file.toPath(), lignes, StandardCharsets.UTF_8);
@@ -188,6 +193,7 @@ public class App_Creation_MP implements Initializable {
                 if (choiceBox.getValue() == null) {
                     JOptionPane.showMessageDialog(new JFrame(), "<html><font color='red'>Erreur : Version du ModPack non sélectionné</font></html>");
                 }else {
+                    progressBar.setVisible(true);
                     creationNouveauMP(event);
                     creerFichier();
                     JOptionPane.showMessageDialog(jFrame, "Modpack crée avec succès !");
