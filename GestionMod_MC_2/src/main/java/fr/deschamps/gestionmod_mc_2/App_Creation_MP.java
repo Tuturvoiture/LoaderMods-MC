@@ -1,6 +1,7 @@
 package fr.deschamps.gestionmod_mc_2;
 
 import fr.deschamps.gestionmod_mc_2.Controller.GM_Controller;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,10 +66,11 @@ public class App_Creation_MP implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         actualiseList();
-        Image image = new Image(getClass().getResource("/fr/deschamps/gestionmod_mc_2/images/giphy2.gif").toString());img.setImage(image);
+        //Image image = new Image(getClass().getResource("/fr/deschamps/gestionmod_mc_2/images/giphy2.gif").toString());img.setImage(image);
         System.out.println("User : "+User);
         System.out.println(lienDossierModsLoader);
         paneCreation.setVisible(false);
+        progressBar.setVisible(false);
         //set version dans choiceBox
         choiceBox.getItems().addAll("1.20.1","1.19.1","1.18.1","1.17.1","1.16.5","1.15.2","1.14.4","1.13.2","1.12.2","1.11.2","1.10.2","1.9.4","1.8.9","1.7.10");
         }
@@ -182,23 +184,49 @@ public class App_Creation_MP implements Initializable {
 
     //valide la création du ModPack
     public void setValiderButton(ActionEvent event) {
-        JFrame jFrame = new JFrame();
-        int result = JOptionPane.showConfirmDialog(jFrame, "Voulez-vous créer un fichier texte avec les informations suivantes ?\nNom du ModPack : '"+nomMP.getText()+"'\nVersion du ModPack : '"+choiceBox.getValue()+"'");
+        int result = JOptionPane.showConfirmDialog(null, "Voulez-vous créer un fichier texte avec les informations suivantes ?\nNom du ModPack : '"+nomMP.getText()+"'\nVersion du ModPack : '"+choiceBox.getValue()+"'");
         if (result == 0) {
             //verif si nom du ModPack vide
-            if (nomMP.getText().equals("")) {
-                JOptionPane.showMessageDialog(new JFrame(), "<html><font color='red'>Erreur : Nom du ModPack vide</font></html>");
+            if (nomMP.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "<html><font color='red'>Erreur : Nom du ModPack vide</font></html>");
             }else {
                 //verif si version selectionné
                 if (choiceBox.getValue() == null) {
-                    JOptionPane.showMessageDialog(new JFrame(), "<html><font color='red'>Erreur : Version du ModPack non sélectionné</font></html>");
+                    JOptionPane.showMessageDialog(null, "<html><font color='red'>Erreur : Version du ModPack non sélectionné</font></html>");
                 }else {
+
+                    Task<Void> task = new Task<Void>() {
+                        @Override
+                        protected Void call() throws Exception {
+                            // Appel à la méthode pour la création du dossier mods_loader et la copie des fichiers
+                            creationNouveauMP(event);
+                            return null;
+                        }
+                    };
+
+                    //affiche la barre + attribut la progression à la "task"
                     progressBar.setVisible(true);
-                    creationNouveauMP(event);
-                    creerFichier();
-                    JOptionPane.showMessageDialog(jFrame, "Modpack crée avec succès !");
-                    paneCreation.setVisible(false);
-                    vBox1.setVisible(true);
+                    progressBar.progressProperty().bind(task.progressProperty());
+
+                    //démarrer la tache dans un nouveau thread
+                    new Thread(task).start();
+
+                    task.setOnSucceeded(e -> {
+                        // Appelle la méthode pour créer le fichier de configuration
+                        creerFichier();
+
+                        // Affiche un message de confirmation
+                        JOptionPane.showMessageDialog(null, "Modpack créé avec succès !");
+
+                        // Cache le panneau de création et réaffiche le VBox initial
+                        paneCreation.setVisible(false);
+                        vBox1.setVisible(true);
+
+                        // Réinitialise la barre de progression
+                        progressBar.setVisible(false);
+                        progressBar.progressProperty().unbind();
+                        progressBar.setProgress(0);
+                    });
                 }
             }
 
