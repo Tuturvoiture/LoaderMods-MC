@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -26,7 +27,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <VBox fx:id="vBox1" alignment="CENTER" layoutX="349.0" layoutY="77.0" prefHeight="235.0" prefWidth="213.0" spacing="10.0">
+            <VBox fx:id="vBox1" alignment="CENTER" layoutX="348.0" layoutY="77.0" prefHeight="235.0" prefWidth="213.0" spacing="10.0">
                <children>
                   <Separator prefHeight="8.0" prefWidth="200.0" />
                   <Label alignment="CENTER" prefHeight="30.0" prefWidth="196.0" text="Actualiser le Dossier des mod(s)" textAlignment="CENTER" textFill="WHITE">
@@ -53,18 +54,19 @@
                   <Separator prefHeight="8.0" prefWidth="200.0" />
                </children>
             </VBox>
-            <Button layoutX="537.0" layoutY="366.0" mnemonicParsing="false" onAction="#switchToAccueil" text="Accueil" />
+            <Button fx:id="buttonAccueil" layoutX="537.0" layoutY="366.0" mnemonicParsing="false" onAction="#switchToAccueil" text="Accueil" />
             <Label fx:id="afficheDossierSelectionner" layoutX="47.0" layoutY="346.0" prefHeight="20.0" prefWidth="370.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <ProgressBar fx:id="progressBar" layoutX="330.0" layoutY="370.0" prefHeight="18.0" prefWidth="190.0" progress="0.0" />
             <Pane fx:id="paneCreation" layoutX="339.0" layoutY="50.0" prefHeight="288.0" prefWidth="232.0">
                <children>
-                  <VBox alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="193.0" prefWidth="205.0" spacing="10.0">
+                  <VBox alignment="CENTER" layoutX="14.0" layoutY="6.0" prefHeight="235.0" prefWidth="205.0" spacing="10.0">
                      <children>
                         <Separator prefHeight="8.0" prefWidth="200.0" />
-                        <Label prefHeight="10.0" prefWidth="174.0" text="Nom du Nouveau ModPack :" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                        <Label prefHeight="14.0" prefWidth="174.0" text="Nom du Nouveau ModPack :" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -78,13 +80,14 @@
                         </Label>
                         <ChoiceBox fx:id="choiceBox" prefHeight="26.0" prefWidth="162.0" />
                         <Separator prefHeight="8.0" prefWidth="215.0" />
+                        <CheckBox fx:id="checkBox" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Activer dossiers / fichiers cachée" textFill="WHITE" />
+                        <Separator prefHeight="8.0" prefWidth="215.0" />
                      </children>
                   </VBox>
                   <Button fx:id="annulerButton" layoutX="162.0" layoutY="252.0" mnemonicParsing="false" onAction="#setAnnulerButton" prefHeight="0.0" prefWidth="57.0" text="Annuler" />
                   <Button fx:id="validerButton" layoutX="94.0" layoutY="252.0" mnemonicParsing="false" onAction="#setValiderButton" prefHeight="25.0" prefWidth="57.0" text="Valider" />
                </children>
             </Pane>
-            <ProgressBar fx:id="progressBar" layoutX="330.0" layoutY="370.0" prefHeight="18.0" prefWidth="190.0" progress="0.0" />
          </children>
       </Pane>
    </children>

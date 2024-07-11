@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.deschamps.gestionmod_mc_2.App_Selection_MP">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.deschamps.gestionmod_mc_2.App_Selection_MP">
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgb(188, 190, 190);">
          <children>
@@ -45,7 +46,7 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Button fx:id="button2" disable="true" mnemonicParsing="false" onAction="#deplaceFichier" text="Charger Mods">
+                  <Button fx:id="button2" disable="true" mnemonicParsing="false" onAction="#chargerButton" text="Charger Mods">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -53,7 +54,8 @@
                   <Separator prefHeight="8.0" prefWidth="200.0" />
                </children>
             </VBox>
-            <Button layoutX="537.0" layoutY="366.0" mnemonicParsing="false" onAction="#switchToAccueil" text="Accueil" />
+            <Button fx:id="buttonAccueil" layoutX="537.0" layoutY="366.0" mnemonicParsing="false" onAction="#switchToAccueil" text="Accueil" />
+            <ProgressBar fx:id="progressBar" layoutX="360.0" layoutY="369.0" prefHeight="18.0" prefWidth="168.0" progress="0.0" visible="false" />
          </children>
       </Pane>
    </children>

@@ -1,6 +1,7 @@
 package fr.deschamps.gestionmod_mc_2;
 
 import fr.deschamps.gestionmod_mc_2.Controller.GM_Controller;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -29,10 +31,13 @@ public class App_Selection_MP implements Initializable {
     public Label afficheDossierSelectionner;
     @FXML
     public ImageView img;
+    @FXML
+    public ProgressBar progressBar = new ProgressBar();
 
     public javafx.scene.control.ListView<String> ListView;
     public Button button1;
     public Button button2;
+    public Button buttonAccueil;
     public String dossierSelectionner;
     static String User = System.getProperty("user.name");
     static String lienDossierMods = "C:\\Users\\"+User+"\\AppData\\Roaming\\.minecraft\\mods\\";
@@ -47,8 +52,8 @@ public class App_Selection_MP implements Initializable {
         System.out.println("User : "+User);
     }
 
-    public static void copy(File src, File dest) throws IOException {
-        GM_Controller.copyFiles(src, dest);
+    public static void copy(File src, File dest,boolean aaa) throws IOException {
+        GM_Controller.copyFiles(src, dest,aaa);
     }
 
     public static void delete(String abc) {
@@ -64,21 +69,15 @@ public class App_Selection_MP implements Initializable {
         stage.show();
     }
 
-    public void deplaceFichier(ActionEvent event) {
-        JFrame jFrame = new JFrame();
-        int result = JOptionPane.showConfirmDialog(jFrame, "<html>Voulez-vous importer le ModPack '"+dossierSelectionner+"' ?<html><html><font color='red'><br>(Cela entraînera la suppression du répertoire mods.)</font></html>");
-
-        if (result == 0) {
-            delete(lienDossierMods);
-            this.event = event;
-            File src = new File(lienDossierModsLoader + dossierSelectionner);
-            File dest = new File(lienDossierMods);
-            try {
-                copy(src, dest);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            JOptionPane.showMessageDialog(jFrame, "Fait !");
+    private void deplaceFichier(ActionEvent event) {
+        delete(lienDossierMods);
+        this.event = event;
+        File src = new File(lienDossierModsLoader + dossierSelectionner);
+        File dest = new File(lienDossierMods);
+        try {
+            copy(src, dest, true);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -109,5 +108,45 @@ public class App_Selection_MP implements Initializable {
         ListView.getItems().addAll(listeTest);
         button2.setDisable(true);
     }
+
+    public void chargerButton(ActionEvent event) {
+        int result = JOptionPane.showConfirmDialog(null, "<html>Voulez-vous importer le ModPack '"+dossierSelectionner+"' ?<html><html><font color='red'><br>(Cela entraînera la suppression du répertoire mods.)</font></html>");
+
+        if (result == 0) {
+            buttonAccueil.setDisable(true);
+            button1.setDisable(true);
+            button2.setDisable(true);
+
+            Task<Void> task = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {
+
+                    deplaceFichier(event);
+                    return null;
+                }
+            };
+
+            //affiche la barre + attribut la progression à la "task"
+            progressBar.setVisible(true);
+            progressBar.progressProperty().bind(task.progressProperty());
+
+            //démarrer la tache dans un nouveau thread
+            new Thread(task).start();
+
+            task.setOnSucceeded(e -> {
+                // Affiche un message de confirmation
+                JOptionPane.showMessageDialog(null, "Modpack créé avec succès !");
+
+                buttonAccueil.setDisable(false);
+                button1.setDisable(false);
+
+                // Réinitialise la barre de progression
+                progressBar.setVisible(false);
+                progressBar.progressProperty().unbind();
+                progressBar.setProgress(0);
+            });
+        }
+    }
+
 
 }

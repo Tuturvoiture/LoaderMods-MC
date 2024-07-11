@@ -30,7 +30,6 @@ public class App_Accueil implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Image image = new Image(getClass().getResource("/fr/deschamps/gestionmod_mc_2/images/giphy1.gif").toString());img.setImage(image);
-        System.out.println("hello");
     }
 
 

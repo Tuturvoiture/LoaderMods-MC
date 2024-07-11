@@ -30,6 +30,7 @@ import java.nio.file.Files;
 import java.util.*;
 
 import static fr.deschamps.gestionmod_mc_2.App_Selection_MP.copy;
+import static fr.deschamps.gestionmod_mc_2.Controller.GM_Controller.deleteFilesByExtension;
 
 public class App_Creation_MP implements Initializable {
 
@@ -50,11 +51,12 @@ public class App_Creation_MP implements Initializable {
 
     public javafx.scene.control.ListView<String> ListView;
 
-
+    public CheckBox checkBox;
     public Button button1;
     public Button button2;
     public Button validerButton;
     public Button annulerButton;
+    public Button buttonAccueil;
     public ChoiceBox choiceBox;
     public VBox vBox1;
     public String dossierSelectionner;
@@ -156,13 +158,18 @@ public class App_Creation_MP implements Initializable {
     }
 
     //copie dossier mods dans le dossier nouveau dossier mods_loader
-    private void creationNouveauMP(ActionEvent event) {
+    private void creationNouveauMP(ActionEvent event,boolean select) {
         creerDossierModsLoader();
         this.event = event;
         File src = new File(lienDossierMods);
         File dest = new File(lienDossierModsLoader + nomMP.getText());
         try {
-            copy(src, dest);
+            copy(src, dest,select);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            deleteFilesByExtension(lienDossierModsLoader + nomMP.getText()+"\\", ".confml");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -194,12 +201,17 @@ public class App_Creation_MP implements Initializable {
                 if (choiceBox.getValue() == null) {
                     JOptionPane.showMessageDialog(null, "<html><font color='red'>Erreur : Version du ModPack non sélectionné</font></html>");
                 }else {
-
+                    boolean isSelected = checkBox.isSelected();
+                    button1.setDisable(true);
+                    button2.setDisable(true);
+                    annulerButton.setDisable(true);
+                    validerButton.setDisable(true);
+                    buttonAccueil.setDisable(true);
                     Task<Void> task = new Task<Void>() {
                         @Override
                         protected Void call() throws Exception {
                             // Appel à la méthode pour la création du dossier mods_loader et la copie des fichiers
-                            creationNouveauMP(event);
+                            creationNouveauMP(event,isSelected);
                             return null;
                         }
                     };
@@ -221,6 +233,15 @@ public class App_Creation_MP implements Initializable {
                         // Cache le panneau de création et réaffiche le VBox initial
                         paneCreation.setVisible(false);
                         vBox1.setVisible(true);
+
+                        button1.setDisable(false);
+                        button2.setDisable(false);
+                        annulerButton.setDisable(false);
+                        validerButton.setDisable(false);
+                        buttonAccueil.setDisable(false);
+
+                        choiceBox.setValue(null);
+                        nomMP.clear();
 
                         // Réinitialise la barre de progression
                         progressBar.setVisible(false);
