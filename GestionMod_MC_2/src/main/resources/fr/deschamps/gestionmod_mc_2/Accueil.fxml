@@ -1,26 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.deschamps.gestionmod_mc_2.App_Accueil">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.deschamps.gestionmod_mc_2.App_Accueil">
    <children>
       <Pane prefHeight="400.0" prefWidth="609.0">
          <children>
             <ImageView fx:id="img" fitHeight="422.0" fitWidth="650.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="button1" layoutX="167.0" layoutY="86.0" mnemonicParsing="false" onAction="#switchToPage1" prefHeight="88.0" prefWidth="276.0" text="Charger un ModPack">
+            <Button fx:id="button1" layoutX="305.0" layoutY="92.0" mnemonicParsing="false" onAction="#switchToPage1" prefHeight="88.0" prefWidth="276.0" text="Charger un ModPack">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="button2" layoutX="167.0" layoutY="227.0" mnemonicParsing="false" onAction="#switchToPage2" prefHeight="88.0" prefWidth="276.0" text="Crée un nouveau ModPack">
+            <Button fx:id="button2" layoutX="305.0" layoutY="233.0" mnemonicParsing="false" onAction="#switchToPage2" prefHeight="88.0" prefWidth="276.0" text="Crée un nouveau ModPack">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
             </Button>
+            <Pane layoutX="26.0" layoutY="25.0" prefHeight="350.0" prefWidth="245.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000005c" height="350.0" layoutX="1.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="245.0" />
+                  <VBox alignment="CENTER" layoutX="68.0" layoutY="46.0" prefHeight="290.0" prefWidth="112.0">
+                     <children>
+                        <Separator prefHeight="20.0" prefWidth="226.0" />
+                        <Label fx:id="nomMp" text="-nom-mp" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Separator prefHeight="20.0" prefWidth="226.0" />
+                        <Label fx:id="versionMp" text="-version" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Separator prefHeight="20.0" prefWidth="226.0" />
+                        <Label fx:id="dateCreationMp" text="-date-creation" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Separator prefHeight="20.0" prefWidth="226.0" />
+                        <Label fx:id="nbModMp" text="-nb-mod" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Separator prefHeight="20.0" prefWidth="226.0" />
+                     </children>
+                  </VBox>
+                  <Label fx:id="titreTexte" alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="18.0" prefHeight="39.0" prefWidth="252.0" text="-text-si-mp-trouvé" textAlignment="CENTER" textOverrun="CLIP">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>

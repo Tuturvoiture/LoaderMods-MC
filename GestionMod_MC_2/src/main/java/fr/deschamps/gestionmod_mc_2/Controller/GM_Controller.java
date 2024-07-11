@@ -1,11 +1,23 @@
 package fr.deschamps.gestionmod_mc_2.Controller;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+import org.w3c.dom.Text;
+
 import java.io.*;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+
+
 public class GM_Controller {
+
+
+    static String User = System.getProperty("user.name");
+    static String lienDossierMods = "C:\\Users\\"+User+"\\AppData\\Roaming\\.minecraft\\mods\\";
 
     public static void copyFiles(File src, File dest,boolean copiCachee) throws IOException {
         if (src.isDirectory()) {
@@ -89,6 +101,65 @@ public class GM_Controller {
                 return FileVisitResult.CONTINUE;
             }
         });
+    }
+
+    public static String findFilesWithExtension(File dir, String extension) {
+        if (!dir.isDirectory()) {
+            System.out.println(dir + " is not a directory");
+            return null;
+        }
+
+        File[] files = dir.listFiles();
+        if (files == null) {
+            System.out.println("Could not list files in directory " + dir);
+            return null;
+        }
+
+        for (File file : files) {
+            if (file.isDirectory()) {
+                // Appel récursif pour parcourir les sous-répertoires
+                String result = findFilesWithExtension(file, extension);
+                if (result != null) {
+                    return result; // Si un fichier est trouvé, retournez-le immédiatement
+                }
+            } else if (file.getName().endsWith(extension)) {
+                return file.getName();
+            }
+        }
+        return null;
+    }
+
+    public static List<String> recupInfo() {
+        List<String> liste = new ArrayList<>();
+        String nomFichier = findFilesWithExtension(new File(lienDossierMods), ".confml");
+
+        if (nomFichier == null) {
+            System.out.println("rien trouvé.");
+            return liste;
+        }
+
+        try {
+            // Création d'un fileReader pour lire le fichier
+            FileReader fileReader = new FileReader(lienDossierMods + nomFichier);
+
+            // Création d'un bufferedReader qui utilise le fileReader
+            BufferedReader reader = new BufferedReader(fileReader);
+
+            // une fonction à essayer pouvant générer une erreur
+            String line = reader.readLine();
+
+            while (line != null) {
+                // affichage de la ligne
+                System.out.println(line);
+                // lecture de la prochaine ligne
+                liste.add(line);
+                line = reader.readLine(); // Lisez la ligne suivante
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return liste;
     }
 
 }
