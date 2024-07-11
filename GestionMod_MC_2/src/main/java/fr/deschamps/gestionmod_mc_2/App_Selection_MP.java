@@ -47,7 +47,7 @@ public class App_Selection_MP implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         actualiseList();
-        //Image image = new Image(getClass().getResource("/fr/deschamps/gestionmod_mc_2/images/giphy3.gif").toString());img.setImage(image);
+        Image image = new Image(getClass().getResource("/fr/deschamps/gestionmod_mc_2/images/giphy3.gif").toString());img.setImage(image);
         button2.setDisable(true);
         System.out.println("User : "+User);
     }
