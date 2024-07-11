@@ -14,5 +14,6 @@ LoaderMods-MC vous permet de créer des packs de mods à partir de vos mods actu
 
 L'application peut récupérer et importer vos packs de mods précédemment créés dans le dossier "/mods" de votre jeu Minecraft.
 
-> Application toujours en développement
-> Projet personnel dans le but de progresser en développement
+##
+> Projet personnel dans le but de progresser en développement - 
+> Application toujours en cours de réalisation
