@@ -27,6 +27,9 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static fr.deschamps.gestionmod_mc_2.App_Selection_MP.copy;
@@ -68,7 +71,7 @@ public class App_Creation_MP implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         actualiseList();
-        Image image = new Image(getClass().getResource("/fr/deschamps/gestionmod_mc_2/images/giphy2.gif").toString());img.setImage(image);
+        //Image image = new Image(getClass().getResource("/fr/deschamps/gestionmod_mc_2/images/giphy2.gif").toString());img.setImage(image);
         System.out.println("User : "+User);
         System.out.println(lienDossierModsLoader);
         paneCreation.setVisible(false);
@@ -123,10 +126,12 @@ public class App_Creation_MP implements Initializable {
         //récuperer info, nom, version, date du jour, nombre de mods, utilisateur actuel
         String nom = this.nomMP.getText();
         String version = (String) choiceBox.getValue();
+        String DATE_FORMAT = "dd/MM/yyyy";
         Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
         int nbMods = ListView.getItems().size();
         String user = User;
-        List<String> lignes = Arrays.asList(nom, version, date.toString(), Integer.toString(nbMods), user);
+        List<String> lignes = Arrays.asList(nom, version, sdf.format(date), Integer.toString(nbMods), user);
         try {
             File file = new File(lienDossierModsLoader + nom + "\\"+nom+".confml");
             if (file.createNewFile()) {

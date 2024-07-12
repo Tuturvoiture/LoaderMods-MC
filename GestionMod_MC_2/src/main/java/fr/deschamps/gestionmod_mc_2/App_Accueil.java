@@ -47,10 +47,10 @@ public class App_Accueil implements Initializable {
 
     private void afficheCharger() {
         List<String> info = GM_Controller.recupInfo();
-        nomMp.setText(info.get(0));
-        versionMp.setText(info.get(1));
-        nbModMp.setText(info.get(2));
-        dateCreationMp.setText(info.get(3));
+        nomMp.setText("Nom du pack : "+info.get(0));
+        versionMp.setText("Version : "+info.get(1));
+        nbModMp.setText("Nombre de mod(s) : "+info.get(3));
+        dateCreationMp.setText("Date de création : "+info.get(2));
     }
 
     public void switchToPage1(ActionEvent event) throws IOException {

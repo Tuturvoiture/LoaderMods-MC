@@ -149,8 +149,6 @@ public class GM_Controller {
             String line = reader.readLine();
 
             while (line != null) {
-                // affichage de la ligne
-                System.out.println(line);
                 // lecture de la prochaine ligne
                 liste.add(line);
                 line = reader.readLine(); // Lisez la ligne suivante

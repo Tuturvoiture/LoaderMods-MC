@@ -28,28 +28,28 @@
             <Pane layoutX="26.0" layoutY="25.0" prefHeight="350.0" prefWidth="245.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000005c" height="350.0" layoutX="1.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="245.0" />
-                  <VBox alignment="CENTER" layoutX="68.0" layoutY="46.0" prefHeight="290.0" prefWidth="112.0">
+                  <VBox alignment="CENTER" layoutX="32.0" layoutY="46.0" prefHeight="290.0" prefWidth="181.0">
                      <children>
                         <Separator prefHeight="20.0" prefWidth="226.0" />
-                        <Label fx:id="nomMp" text="-nom-mp" textAlignment="CENTER">
+                        <Label fx:id="nomMp" alignment="CENTER" prefHeight="26.0" prefWidth="224.0" text="-nom-mp" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
                         <Separator prefHeight="20.0" prefWidth="226.0" />
-                        <Label fx:id="versionMp" text="-version" textAlignment="CENTER">
+                        <Label fx:id="versionMp" alignment="CENTER" prefHeight="26.0" prefWidth="192.0" text="-version" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
                         <Separator prefHeight="20.0" prefWidth="226.0" />
-                        <Label fx:id="dateCreationMp" text="-date-creation" textAlignment="CENTER">
+                        <Label fx:id="dateCreationMp" alignment="CENTER" prefHeight="26.0" prefWidth="202.0" text="-date-creation" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
                         <Separator prefHeight="20.0" prefWidth="226.0" />
-                        <Label fx:id="nbModMp" text="-nb-mod" textAlignment="CENTER">
+                        <Label fx:id="nbModMp" alignment="CENTER" prefHeight="26.0" prefWidth="206.0" text="-nb-mod" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
