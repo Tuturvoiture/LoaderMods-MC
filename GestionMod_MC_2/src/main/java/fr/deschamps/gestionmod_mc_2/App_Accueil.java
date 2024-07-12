@@ -22,6 +22,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class App_Accueil implements Initializable {
     public Label dateCreationMp;
     public Label titreTexte;
     public Label textModif;
+    public Label titreTexte1;
     @FXML
     public VBox vboxMP;
 
@@ -47,9 +49,6 @@ public class App_Accueil implements Initializable {
 
     @FXML
     public ImageView img;
-
-    Tooltip t, t1, t2;
-    Label l, l1, l2;
 
 
     @Override
@@ -69,16 +68,26 @@ public class App_Accueil implements Initializable {
 
     private void afficheCharger() {
         List<String> info = GM_Controller.recupInfo();
+        Integer nbModActuel = GM_Controller.countFiles();
+        System.out.println("nbModActuel : "+nbModActuel);
         if (info.size() == 0) {
             vboxMP.setVisible(false);
+            titreTexte1.setVisible(true);
+
         }else {
             vboxMP.setVisible(true);
-
+            titreTexte1.setVisible(false);
             nomMp.setText(info.get(0));
             versionMp.setText(info.get(1));
-            nbModMp.setText(info.get(3));
+            if (nbModActuel != Integer.parseInt(info.get(3))){
+                nbModMp.setText(info.get(3)+" + "+(nbModActuel-Integer.parseInt(info.get(3))));
+                textModif.setVisible(true);
+            }else{
+                nbModMp.setText(info.get(3));
+            }
             dateCreationMp.setText(info.get(2));
             infoBulle();
+            nbModMp.setText(info.get(3));
         }
     }
 

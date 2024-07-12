@@ -101,7 +101,7 @@ public class App_Creation_MP implements Initializable {
             for (int i = 0; i < files.length; i++) {
                 if (files[i].isFile() == true) {
                     listeTest.add("File : " + files[i].getName());
-                } //else {listeTest.add("Fichier : " + files[i].getName());}
+                }
             }
 
         }

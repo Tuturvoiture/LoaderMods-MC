@@ -28,7 +28,7 @@
             <Pane layoutX="26.0" layoutY="25.0" prefHeight="350.0" prefWidth="245.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000005c" height="350.0" layoutX="1.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="245.0" />
-                  <VBox fx:id="vboxMP" alignment="CENTER" layoutX="32.0" layoutY="46.0" prefHeight="290.0" prefWidth="181.0">
+                  <VBox fx:id="vboxMP" alignment="CENTER" layoutX="32.0" layoutY="46.0" prefHeight="277.0" prefWidth="181.0">
                      <children>
                         <Separator prefHeight="20.0" prefWidth="226.0" />
                         <Label text="Nom du pack :" />
@@ -61,7 +61,7 @@
                         <Separator prefHeight="20.0" prefWidth="226.0" />
                      </children>
                   </VBox>
-                  <Label fx:id="titreTexte" alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="18.0" prefHeight="39.0" prefWidth="252.0" text="-text-si-mp-trouvé" textAlignment="CENTER" textOverrun="CLIP" visible="false">
+                  <Label fx:id="titreTexte" alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="9.0" prefHeight="39.0" prefWidth="252.0" text="Voila le Modpack trouvé" textAlignment="CENTER" textOverrun="CLIP">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -71,6 +71,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
+                  <Label fx:id="textModif" alignment="CENTER" layoutX="20.0" layoutY="324.0" text="Attention, Modification externe détecté" textAlignment="CENTER" textFill="#a60404" visible="false" />
                </children>
             </Pane>
          </children>

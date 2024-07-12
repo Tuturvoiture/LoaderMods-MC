@@ -1,9 +1,5 @@
 package fr.deschamps.gestionmod_mc_2.Controller;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import org.w3c.dom.Text;
-
 import java.io.*;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -158,6 +154,22 @@ public class GM_Controller {
             e.printStackTrace();
         }
         return liste;
+    }
+
+    public static int countFiles() {
+        File file = new File(lienDossierMods); File[] files = file.listFiles();
+        Integer nb = 0;
+        if (files != null) {
+            for (int i = 0; i < files.length; i++) {
+                if (files[i].isFile() == true) {
+                    String result = findFilesWithExtension(file, ".comfml");
+                    if (result != null) {
+                        nb++;
+                    }
+                }
+            }
+        }
+        return nb;
     }
 
 }
