@@ -28,28 +28,32 @@
             <Pane layoutX="26.0" layoutY="25.0" prefHeight="350.0" prefWidth="245.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000005c" height="350.0" layoutX="1.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="245.0" />
-                  <VBox alignment="CENTER" layoutX="32.0" layoutY="46.0" prefHeight="290.0" prefWidth="181.0">
+                  <VBox fx:id="vboxMP" alignment="CENTER" layoutX="32.0" layoutY="46.0" prefHeight="290.0" prefWidth="181.0">
                      <children>
                         <Separator prefHeight="20.0" prefWidth="226.0" />
+                        <Label text="Nom du pack :" />
                         <Label fx:id="nomMp" alignment="CENTER" prefHeight="26.0" prefWidth="224.0" text="-nom-mp" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
                         <Separator prefHeight="20.0" prefWidth="226.0" />
+                        <Label text="Version :" />
                         <Label fx:id="versionMp" alignment="CENTER" prefHeight="26.0" prefWidth="192.0" text="-version" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
                         <Separator prefHeight="20.0" prefWidth="226.0" />
-                        <Label fx:id="dateCreationMp" alignment="CENTER" prefHeight="26.0" prefWidth="202.0" text="-date-creation" textAlignment="CENTER">
+                        <Label text="Nombre de mod(s) :" />
+                        <Label fx:id="nbModMp" alignment="CENTER" prefHeight="26.0" prefWidth="206.0" text="-nb-mod" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
                         <Separator prefHeight="20.0" prefWidth="226.0" />
-                        <Label fx:id="nbModMp" alignment="CENTER" prefHeight="26.0" prefWidth="206.0" text="-nb-mod" textAlignment="CENTER">
+                        <Label text="Date de création :" />
+                        <Label fx:id="dateCreationMp" alignment="CENTER" prefHeight="26.0" prefWidth="202.0" text="-date-creation" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -57,7 +61,12 @@
                         <Separator prefHeight="20.0" prefWidth="226.0" />
                      </children>
                   </VBox>
-                  <Label fx:id="titreTexte" alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="18.0" prefHeight="39.0" prefWidth="252.0" text="-text-si-mp-trouvé" textAlignment="CENTER" textOverrun="CLIP">
+                  <Label fx:id="titreTexte" alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="18.0" prefHeight="39.0" prefWidth="252.0" text="-text-si-mp-trouvé" textAlignment="CENTER" textOverrun="CLIP" visible="false">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="titreTexte1" alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="139.0" prefHeight="73.0" prefWidth="169.0" text="Aucun packMod chargé / trouvé" textAlignment="CENTER" textOverrun="CLIP" visible="false" wrapText="true">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>

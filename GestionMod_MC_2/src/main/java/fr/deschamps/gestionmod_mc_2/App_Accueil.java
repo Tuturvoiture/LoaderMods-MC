@@ -12,7 +12,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
+import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 
@@ -31,6 +37,9 @@ public class App_Accueil implements Initializable {
     public Label nbModMp;
     public Label dateCreationMp;
     public Label titreTexte;
+    public Label textModif;
+    @FXML
+    public VBox vboxMP;
 
     @FXML
     public Button button1;
@@ -39,18 +48,38 @@ public class App_Accueil implements Initializable {
     @FXML
     public ImageView img;
 
+    Tooltip t, t1, t2;
+    Label l, l1, l2;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Image image = new Image(getClass().getResource("/fr/deschamps/gestionmod_mc_2/images/giphy1.gif").toString());img.setImage(image);
         afficheCharger();
+
     }
+
+    private void infoBulle(){
+        nomMp.setTooltip(new Tooltip("Nom du ModPack actuellement \nchargée dans votre dossier /mods"));
+        versionMp.setTooltip(new Tooltip("Version Modpack actuellement \nchargée dans votre dossier /mods"));
+        nbModMp.setTooltip(new Tooltip("Nombre de Mods chargée depuis le\nModpack dans votre dossier /mods"));
+        dateCreationMp.setTooltip(new Tooltip("Date quand le Modpack \nactuel a été créée"));
+    }
+
 
     private void afficheCharger() {
         List<String> info = GM_Controller.recupInfo();
-        nomMp.setText("Nom du pack : "+info.get(0));
-        versionMp.setText("Version : "+info.get(1));
-        nbModMp.setText("Nombre de mod(s) : "+info.get(3));
-        dateCreationMp.setText("Date de création : "+info.get(2));
+        if (info.size() == 0) {
+            vboxMP.setVisible(false);
+        }else {
+            vboxMP.setVisible(true);
+
+            nomMp.setText(info.get(0));
+            versionMp.setText(info.get(1));
+            nbModMp.setText(info.get(3));
+            dateCreationMp.setText(info.get(2));
+            infoBulle();
+        }
     }
 
     public void switchToPage1(ActionEvent event) throws IOException {
