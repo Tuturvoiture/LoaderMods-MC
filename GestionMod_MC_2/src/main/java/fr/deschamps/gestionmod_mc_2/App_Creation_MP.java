@@ -129,7 +129,7 @@ public class App_Creation_MP implements Initializable {
         String DATE_FORMAT = "dd/MM/yyyy";
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
-        int nbMods = ListView.getItems().size();
+        int nbMods = GM_Controller.countFilesWithExtension();
         String user = User;
         List<String> lignes = Arrays.asList(nom, version, sdf.format(date), Integer.toString(nbMods), user);
         try {

@@ -66,7 +66,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="titreTexte1" alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="139.0" prefHeight="73.0" prefWidth="169.0" text="Aucun packMod chargé / trouvé" textAlignment="CENTER" textOverrun="CLIP" visible="false" wrapText="true">
+                  <Label fx:id="titreTexte1" alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="139.0" prefHeight="73.0" prefWidth="169.0" text="Aucun packMod chargé / trouvé" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>

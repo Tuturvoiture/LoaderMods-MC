@@ -66,15 +66,18 @@ public class App_Accueil implements Initializable {
     }
 
 
+
     private void afficheCharger() {
         List<String> info = GM_Controller.recupInfo();
-        Integer nbModActuel = GM_Controller.countFiles();
+        Integer nbModActuel = GM_Controller.countFilesWithExtension();
         System.out.println("nbModActuel : "+nbModActuel);
         if (info.size() == 0) {
+            titreTexte.setVisible(false);
             vboxMP.setVisible(false);
             titreTexte1.setVisible(true);
 
         }else {
+            titreTexte.setVisible(true);
             vboxMP.setVisible(true);
             titreTexte1.setVisible(false);
             nomMp.setText(info.get(0));

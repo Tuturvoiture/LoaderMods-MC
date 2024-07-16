@@ -101,24 +101,14 @@ public class GM_Controller {
 
     public static String findFilesWithExtension(File dir, String extension) {
         if (!dir.isDirectory()) {
-            System.out.println(dir + " is not a directory");
             return null;
         }
-
         File[] files = dir.listFiles();
         if (files == null) {
-            System.out.println("Could not list files in directory " + dir);
             return null;
         }
-
         for (File file : files) {
-            if (file.isDirectory()) {
-                // Appel récursif pour parcourir les sous-répertoires
-                String result = findFilesWithExtension(file, extension);
-                if (result != null) {
-                    return result; // Si un fichier est trouvé, retournez-le immédiatement
-                }
-            } else if (file.getName().endsWith(extension)) {
+            if (file.getName().endsWith(extension)) {
                 return file.getName();
             }
         }
@@ -128,48 +118,48 @@ public class GM_Controller {
     public static List<String> recupInfo() {
         List<String> liste = new ArrayList<>();
         String nomFichier = findFilesWithExtension(new File(lienDossierMods), ".confml");
-
         if (nomFichier == null) {
-            System.out.println("rien trouvé.");
             return liste;
         }
-
         try {
             // Création d'un fileReader pour lire le fichier
-            FileReader fileReader = new FileReader(lienDossierMods + nomFichier);
+            FileReader fileReader = new FileReader(lienDossierMods + File.separator + nomFichier);
 
             // Création d'un bufferedReader qui utilise le fileReader
             BufferedReader reader = new BufferedReader(fileReader);
 
-            // une fonction à essayer pouvant générer une erreur
+            // Lecture des lignes et ajout à la liste
             String line = reader.readLine();
-
             while (line != null) {
-                // lecture de la prochaine ligne
                 liste.add(line);
-                line = reader.readLine(); // Lisez la ligne suivante
+                line = reader.readLine();
             }
             reader.close();
+
+            // Vérification des informations requises
+            if (liste.size() < 4 || liste.get(0).isEmpty() || liste.get(1).isEmpty() || liste.get(2).isEmpty() || liste.get(3).isEmpty()) {
+                return new ArrayList<>();
+            }
         } catch (IOException e) {
             e.printStackTrace();
+            return new ArrayList<>();
         }
         return liste;
     }
 
-    public static int countFiles() {
-        File file = new File(lienDossierMods); File[] files = file.listFiles();
-        Integer nb = 0;
+    public static int countFilesWithExtension() {
+        File dir = new File(lienDossierMods);
+        File[] files = dir.listFiles();
+        int count = 0;
         if (files != null) {
-            for (int i = 0; i < files.length; i++) {
-                if (files[i].isFile() == true) {
-                    String result = findFilesWithExtension(file, ".comfml");
-                    if (result != null) {
-                        nb++;
-                    }
+            for (File file : files) {
+                if (file.isFile() && file.getName().endsWith(".jar")) {
+                    count++;
                 }
             }
         }
-        return nb;
+        return count;
     }
+
 
 }

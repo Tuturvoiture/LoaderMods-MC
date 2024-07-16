@@ -135,7 +135,7 @@ public class App_Selection_MP implements Initializable {
 
             task.setOnSucceeded(e -> {
                 // Affiche un message de confirmation
-                JOptionPane.showMessageDialog(null, "Modpack créé avec succès !");
+                JOptionPane.showMessageDialog(null, "Modpack importé avec succès !");
 
                 buttonAccueil.setDisable(false);
                 button1.setDisable(false);
