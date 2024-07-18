@@ -33,20 +33,11 @@ import java.util.ResourceBundle;
 public class App_Accueil implements Initializable {
 
     @FXML
-    public Label nomMp;
-    public Label versionMp;
-    public Label nbModMp;
-    public Label dateCreationMp;
-    public Label titreTexte;
-    public Label textModif;
-    public Label titreTexte1;
+    public Label nomMp, versionMp, nbModMp, dateCreationMp, titreTexte, textModif, titreTexte1;
     @FXML
     public VBox vboxMP;
-
     @FXML
-    public Button button1;
-    public Button button2;
-
+    public Button button1, button2;
     @FXML
     public ImageView img;
 
@@ -55,42 +46,47 @@ public class App_Accueil implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Image image = new Image(getClass().getResource("/fr/deschamps/gestionmod_mc_2/images/giphy1.gif").toString());img.setImage(image);
         afficheCharger();
-
     }
 
-    private void infoBulle(){
-        nomMp.setTooltip(new Tooltip("Nom du ModPack actuellement \nchargée dans votre dossier /mods"));
-        versionMp.setTooltip(new Tooltip("Version Modpack actuellement \nchargée dans votre dossier /mods"));
-        nbModMp.setTooltip(new Tooltip("Nombre de Mods chargée depuis le\nModpack dans votre dossier /mods"));
-        dateCreationMp.setTooltip(new Tooltip("Date quand le Modpack \nactuel a été créée"));
+    private void infoBulle(boolean aaa) {
+        nomMp.setTooltip(new Tooltip("Nom du ModPack actuellement \nchargé dans votre dossier /mods"));
+        versionMp.setTooltip(new Tooltip("Version des mods actuellement \nchargées depuis le Modpack"));
+        dateCreationMp.setTooltip(new Tooltip("Date de création du Modpack chargée\nactuellement dans votre dossier /mods"));
+        if(aaa){
+            nbModMp.setTooltip(new Tooltip("Nombre de Mods chargée depuis le Modpack dans votre dossier /mods.\n!! Attention, le nombre de mods trouvée est différent de celui du Modpack actuel !!"));
+            textModif.setTooltip(new Tooltip("Des modifications externe au logiciel ont été apportées au\nModpack actuellement chargée dans votre dossier /mods."));
+        }else {
+            nbModMp.setTooltip(new Tooltip("Nombre de Mods chargée depuis le\nModpack dans votre dossier /mods"));
+        }
     }
-
-
 
     private void afficheCharger() {
         List<String> info = GM_Controller.recupInfo();
         Integer nbModActuel = GM_Controller.countFilesWithExtension();
+        Integer abc = Integer.parseInt(info.get(3));
         System.out.println("nbModActuel : "+nbModActuel);
-        if (info.size() == 0) {
+        boolean changement = false;
+        if (info.isEmpty()) {
             titreTexte.setVisible(false);
             vboxMP.setVisible(false);
             titreTexte1.setVisible(true);
-
         }else {
             titreTexte.setVisible(true);
             vboxMP.setVisible(true);
             titreTexte1.setVisible(false);
             nomMp.setText(info.get(0));
             versionMp.setText(info.get(1));
-            if (nbModActuel != Integer.parseInt(info.get(3))){
-                nbModMp.setText(info.get(3)+" + "+(nbModActuel-Integer.parseInt(info.get(3))));
+            if (!nbModActuel.equals(abc)){
+                //changer couleur + texte
+                nbModMp.setStyle("-fx-text-fill: #9c0e02;");
+                nbModMp.setText(nbModActuel.toString()+"*");
                 textModif.setVisible(true);
+                changement = true;
             }else{
                 nbModMp.setText(info.get(3));
             }
             dateCreationMp.setText(info.get(2));
-            infoBulle();
-            nbModMp.setText(info.get(3));
+            infoBulle(changement);
         }
     }
 
