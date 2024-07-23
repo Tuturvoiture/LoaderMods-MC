@@ -37,7 +37,7 @@ public class App_Accueil implements Initializable {
     @FXML
     public VBox vboxMP;
     @FXML
-    public Button button1, button2;
+    public Button button1, button2, button3;
     @FXML
     public ImageView img;
 
@@ -63,7 +63,7 @@ public class App_Accueil implements Initializable {
     private void afficheCharger() {
         List<String> info = GM_Controller.recupInfo();
         Integer nbModActuel = GM_Controller.countFilesWithExtension();
-        Integer abc = Integer.parseInt(info.get(3));
+
         System.out.println("nbModActuel : "+nbModActuel);
         boolean changement = false;
         if (info.isEmpty()) {
@@ -71,6 +71,7 @@ public class App_Accueil implements Initializable {
             vboxMP.setVisible(false);
             titreTexte1.setVisible(true);
         }else {
+            Integer abc = Integer.parseInt(info.get(3));
             titreTexte.setVisible(true);
             vboxMP.setVisible(true);
             titreTexte1.setVisible(false);
@@ -108,6 +109,17 @@ public class App_Accueil implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Création ModPack");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToPage3(ActionEvent event) throws IOException {
+        button1.setDisable(true);
+        button2.setDisable(true);
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Page3.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Mise à jour d'un MP");
         stage.setScene(scene);
         stage.show();
     }

@@ -35,9 +35,7 @@ public class App_Selection_MP implements Initializable {
     public ProgressBar progressBar = new ProgressBar();
 
     public javafx.scene.control.ListView<String> ListView;
-    public Button button1;
-    public Button button2;
-    public Button buttonAccueil;
+    public Button button1, button2, buttonAccueil;
     public String dossierSelectionner;
     static String User = System.getProperty("user.name");
     static String lienDossierMods = "C:\\Users\\"+User+"\\AppData\\Roaming\\.minecraft\\mods\\";
