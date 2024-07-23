@@ -63,7 +63,7 @@ public class App_MAJ implements Initializable {
     public void switchToPage2(ActionEvent event) throws IOException {
         button1.setDisable(true);
         button2.setDisable(true);
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Page2.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Create.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Création ModPack");

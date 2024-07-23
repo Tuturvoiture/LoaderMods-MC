@@ -94,7 +94,7 @@ public class App_Accueil implements Initializable {
     public void switchToPage1(ActionEvent event) throws IOException {
         button1.setDisable(true);
         button2.setDisable(true);
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Page1.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Select.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Chargement ModPack");
@@ -105,7 +105,7 @@ public class App_Accueil implements Initializable {
     public void switchToPage2(ActionEvent event) throws IOException {
         button1.setDisable(true);
         button2.setDisable(true);
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Page2.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Create.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Création ModPack");
@@ -116,7 +116,7 @@ public class App_Accueil implements Initializable {
     public void switchToPage3(ActionEvent event) throws IOException {
         button1.setDisable(true);
         button2.setDisable(true);
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Page3.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MAJ.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Mise à jour d'un MP");
