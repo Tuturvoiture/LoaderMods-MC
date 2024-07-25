@@ -23,6 +23,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import static fr.deschamps.gestionmod_mc_2.App_Selection_MP.copy;
+import static fr.deschamps.gestionmod_mc_2.App_Selection_MP.delete;
+
 public class App_MAJ implements Initializable {
 
     @FXML
@@ -71,7 +74,6 @@ public class App_MAJ implements Initializable {
         stage.show();
     }
 
-
     public void actualiseList() {
         ArrayList<String> listeTest = new ArrayList<String>();
         File file = new File(lienDossierMods); File[] files = file.listFiles();
@@ -86,7 +88,6 @@ public class App_MAJ implements Initializable {
                     listeTest.add("File : " + files[i].getName());
                 }
             }
-
         }
         else {
             welcomeText.setText("Répertoire vide ou inexistant !");
@@ -96,6 +97,7 @@ public class App_MAJ implements Initializable {
     }
 
     private void checkMPDossier(){
+        paneErreur.setVisible(false);
         String nom = info.get(0);
         if (!chercheDossierAvecNom(nom)){
             paneErreur.setVisible(true);
@@ -103,18 +105,34 @@ public class App_MAJ implements Initializable {
     }
 
     private boolean chercheDossierAvecNom(String nom) {
-        ArrayList<String> listeTest = new ArrayList<String>();
-        File file = new File(lienDossierModsLoader); File[] files = file.listFiles();
+        File file = new File(lienDossierModsLoader);
+        File[] files = file.listFiles();
         if (files != null) {
-            for (int i = 0; i < files.length; i++) {
-                if (files[i].isFile() == true) {
-                    if (files[i].getName().equals(nom)){return true;}
+            for (File f : files) {
+                if (f.isDirectory()) {
+                    if (f.getName().equals(nom)) {
+                        return true;
+                    }
                 }
             }
-
         }
         return false;
     }
 
+    public void majButton(ActionEvent event) {
+        progressBar.setVisible(true);
+        deplaceFichier(event);
+    }
+
+    private void deplaceFichier(ActionEvent event) {
+        delete(lienDossierModsLoader+info.get(0));
+        File src = new File(lienDossierMods + info.get(0));
+        File dest = new File(lienDossierModsLoader + info.get(0));
+        try {
+            copy(src, dest, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

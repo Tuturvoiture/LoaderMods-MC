@@ -63,8 +63,6 @@ public class App_Accueil implements Initializable {
     private void afficheCharger() {
         List<String> info = GM_Controller.recupInfo();
         Integer nbModActuel = GM_Controller.countFilesWithExtension();
-
-        System.out.println("nbModActuel : "+nbModActuel);
         boolean changement = false;
         if (info.isEmpty()) {
             titreTexte.setVisible(false);
