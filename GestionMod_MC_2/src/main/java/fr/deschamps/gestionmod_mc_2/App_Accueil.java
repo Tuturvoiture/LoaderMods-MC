@@ -41,6 +41,8 @@ public class App_Accueil implements Initializable {
     @FXML
     public ImageView img;
 
+    List<String> info = GM_Controller.recupInfo();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,7 +55,7 @@ public class App_Accueil implements Initializable {
         versionMp.setTooltip(new Tooltip("Version des mods actuellement \nchargées depuis le Modpack"));
         dateCreationMp.setTooltip(new Tooltip("Date de création du Modpack chargée\nactuellement dans votre dossier /mods"));
         if(aaa){
-            nbModMp.setTooltip(new Tooltip("Nombre de Mods chargée depuis le Modpack dans votre dossier /mods.\n!! Attention, le nombre de mods trouvée est différent de celui du Modpack actuel !!"));
+            nbModMp.setTooltip(new Tooltip("!! Attention, le nombre de mods trouvée est différent de celui du Modpack actuel !!\nLe Pack actuel devrait contenir un total de "+info.get(3)+" mods"));
             textModif.setTooltip(new Tooltip("Des modifications externe au logiciel ont été apportées au\nModpack actuellement chargée dans votre dossier /mods."));
         }else {
             nbModMp.setTooltip(new Tooltip("Nombre de Mods chargée depuis le\nModpack dans votre dossier /mods"));
@@ -61,7 +63,6 @@ public class App_Accueil implements Initializable {
     }
 
     private void afficheCharger() {
-        List<String> info = GM_Controller.recupInfo();
         Integer nbModActuel = GM_Controller.countFilesWithExtension();
         boolean changement = false;
         if (info.isEmpty()) {

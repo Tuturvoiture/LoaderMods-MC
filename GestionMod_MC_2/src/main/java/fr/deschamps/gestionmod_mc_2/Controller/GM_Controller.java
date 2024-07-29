@@ -1,12 +1,14 @@
 package fr.deschamps.gestionmod_mc_2.Controller;
 
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 public class GM_Controller {
@@ -14,6 +16,7 @@ public class GM_Controller {
 
     static String User = System.getProperty("user.name");
     static String lienDossierMods = "C:\\Users\\"+User+"\\AppData\\Roaming\\.minecraft\\mods\\";
+    static String lienDossierModsLoader = "C:\\Users\\"+User+"\\AppData\\Roaming\\.minecraft\\mods_loaders\\";
 
     public static void copyFiles(File src, File dest,boolean copiCachee) throws IOException {
         if (src.isDirectory()) {
@@ -159,6 +162,38 @@ public class GM_Controller {
             }
         }
         return count;
+    }
+
+    public static void creerFichier(String nom, String version,Boolean siLoader) {
+
+        //récuperer info, nom, version, date du jour, nombre de mods, utilisateur actuel
+        //String nom = nomMP.getText();
+        //String version = (String) choiceBox.getValue();
+        String DATE_FORMAT = "dd/MM/yyyy";
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+        int nbMods = countFilesWithExtension();
+        String user = User;
+        List<String> lignes = Arrays.asList(nom, version, sdf.format(date), Integer.toString(nbMods), user);
+        File file;
+        if (siLoader){
+            file = new File(lienDossierModsLoader + nom + "\\"+nom+".confml");
+        }
+        else {
+            file = new File(lienDossierMods +nom+".confml");
+        }
+        try {
+
+            if (file.createNewFile()) {
+                System.out.println("Fichier créé : " + file.getName());
+                Files.write(file.toPath(), lignes, StandardCharsets.UTF_8);
+            } else {
+                System.out.println("Fichier déjà existant.");
+            }
+        } catch (IOException e) {
+            System.out.println("Erreur lors de la création du fichier.");
+            e.printStackTrace();
+        }
     }
 
 

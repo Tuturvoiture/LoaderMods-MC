@@ -120,7 +120,7 @@ public class App_Creation_MP implements Initializable {
     }
 
     //crea fichier texte avec info du ModPack
-    private void creerFichier(){
+    private void creerFichier2(){
 
         //récuperer info, nom, version, date du jour, nombre de mods, utilisateur actuel
         String nom = this.nomMP.getText();
@@ -229,7 +229,7 @@ public class App_Creation_MP implements Initializable {
 
                     task.setOnSucceeded(e -> {
                         // Appelle la méthode pour créer le fichier de configuration
-                        creerFichier();
+                        GM_Controller.creerFichier(nomMP.getText(), (String) choiceBox.getValue(), true);
 
                         // Affiche un message de confirmation
                         JOptionPane.showMessageDialog(null, "Modpack créé avec succès !");

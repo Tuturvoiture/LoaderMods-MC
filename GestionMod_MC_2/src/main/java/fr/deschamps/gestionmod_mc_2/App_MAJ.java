@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 import fr.deschamps.gestionmod_mc_2.Controller.GM_Controller;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,8 +24,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+
 import static fr.deschamps.gestionmod_mc_2.App_Selection_MP.copy;
 import static fr.deschamps.gestionmod_mc_2.App_Selection_MP.delete;
+import static fr.deschamps.gestionmod_mc_2.Controller.GM_Controller.countFilesWithExtension;
+import static fr.deschamps.gestionmod_mc_2.Controller.GM_Controller.deleteFilesByExtension;
 
 public class App_MAJ implements Initializable {
 
@@ -119,19 +124,63 @@ public class App_MAJ implements Initializable {
         return false;
     }
 
-    public void majButton(ActionEvent event) {
-        progressBar.setVisible(true);
-        deplaceFichier(event);
-    }
+
 
     private void deplaceFichier(ActionEvent event) {
         delete(lienDossierModsLoader+info.get(0));
-        File src = new File(lienDossierMods + info.get(0));
+        File src = new File(lienDossierMods);
         File dest = new File(lienDossierModsLoader + info.get(0));
         try {
-            copy(src, dest, true);
+            copy(src, dest, false);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+
+    public void majButton(ActionEvent event) {
+        int result = JOptionPane.showConfirmDialog(null, "<html>Voulez-vous mettre à jour le ModPack '"+info.get(0)+"' ?<html><html><font color='red'><br>(Attention, le dossier ModPack va être réécrit)</font></html>");
+
+        if (result == 0) {
+            buttonAccueil.setDisable(true);
+            button1.setDisable(true);
+            button2.setDisable(true);
+
+            Task<Void> task = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {
+
+                    deplaceFichier(event);
+                    deleteFilesByExtension(lienDossierModsLoader + info.get(0) +"\\", ".confml");
+                    GM_Controller.creerFichier(info.get(0),info.get(1),true);
+                    deleteFilesByExtension(lienDossierMods, ".confml");
+                    //copie du fichier .confml de .mods pour mettre le nouveau de .modsloader
+                    System.out.println(lienDossierModsLoader + info.get(0) + ".confml");
+                    System.out.println(lienDossierMods + info.get(0) + ".confml");
+                    GM_Controller.creerFichier(info.get(0),info.get(1),false);
+                    return null;
+                }
+            };
+
+            //affiche la barre + attribut la progression à la "task"
+            progressBar.setVisible(true);
+            progressBar.progressProperty().bind(task.progressProperty());
+
+            //démarrer la tache dans un nouveau thread
+            new Thread(task).start();
+
+            task.setOnSucceeded(e -> {
+                // Affiche un message de confirmation
+                JOptionPane.showMessageDialog(null, "Mise à jour terminé !");
+
+                buttonAccueil.setDisable(false);
+                button1.setDisable(false);
+
+                // Réinitialise la barre de progression
+                progressBar.setVisible(false);
+                progressBar.progressProperty().unbind();
+                progressBar.setProgress(0);
+            });
         }
     }
 

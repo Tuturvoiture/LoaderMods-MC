@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.deschamps.gestionmod_mc_2.App_MAJ">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.deschamps.gestionmod_mc_2.App_MAJ">
    <children>
       <Pane fx:id="paneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgb(88, 90, 100);">
          <children>
@@ -44,7 +44,7 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Button fx:id="button2" mnemonicParsing="false" text="Mettre à jour">
+                  <Button fx:id="button2" mnemonicParsing="false" onAction="#majButton" text="Mettre à jour">
                      <font>
                         <Font size="14.0" />
                      </font>
