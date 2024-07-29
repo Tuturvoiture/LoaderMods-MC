@@ -83,7 +83,7 @@ public class App_Creation_MP implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Accueil.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
-        stage.setTitle("Accueil");
+        stage.setTitle("ModLoader - Accueil");
         stage.setScene(scene);
         stage.show();
     }
@@ -98,7 +98,7 @@ public class App_Creation_MP implements Initializable {
                 welcomeText.setText("Voila le Mod trouvé");
             }
             for (int i = 0; i < files.length; i++) {
-                if (files[i].isFile() == true) {
+                if (files[i].isFile() && files[i].getName().endsWith(".jar")) {
                     listeTest.add("File : " + files[i].getName());
                 }
             }
@@ -211,6 +211,7 @@ public class App_Creation_MP implements Initializable {
                     annulerButton.setDisable(true);
                     validerButton.setDisable(true);
                     buttonAccueil.setDisable(true);
+                    ListView.setDisable(true);
                     Task<Void> task = new Task<Void>() {
                         @Override
                         protected Void call() throws Exception {
@@ -243,6 +244,7 @@ public class App_Creation_MP implements Initializable {
                         annulerButton.setDisable(false);
                         validerButton.setDisable(false);
                         buttonAccueil.setDisable(false);
+                        ListView.setDisable(false);
 
                         choiceBox.setValue(null);
                         nomMP.clear();

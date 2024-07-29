@@ -62,7 +62,7 @@ public class App_Selection_MP implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Accueil.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
-        stage.setTitle("Accueil");
+        stage.setTitle("ModLoader - Accueil");
         stage.setScene(scene);
         stage.show();
     }
@@ -114,11 +114,11 @@ public class App_Selection_MP implements Initializable {
             buttonAccueil.setDisable(true);
             button1.setDisable(true);
             button2.setDisable(true);
+            ListView.setDisable(true);
 
             Task<Void> task = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
-
                     deplaceFichier(event);
                     return null;
                 }
@@ -137,6 +137,7 @@ public class App_Selection_MP implements Initializable {
 
                 buttonAccueil.setDisable(false);
                 button1.setDisable(false);
+                ListView.setDisable(false);
 
                 // Réinitialise la barre de progression
                 progressBar.setVisible(false);

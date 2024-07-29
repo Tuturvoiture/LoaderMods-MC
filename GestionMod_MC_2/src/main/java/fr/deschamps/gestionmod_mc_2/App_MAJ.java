@@ -63,7 +63,7 @@ public class App_MAJ implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Accueil.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
-        stage.setTitle("Accueil");
+        stage.setTitle("ModLoader - Accueil");
         stage.setScene(scene);
         stage.show();
     }
@@ -74,7 +74,7 @@ public class App_MAJ implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Create.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
-        stage.setTitle("Création ModPack");
+        stage.setTitle("ModLoader - Création ModPack");
         stage.setScene(scene);
         stage.show();
     }
@@ -89,7 +89,7 @@ public class App_MAJ implements Initializable {
                 welcomeText.setText("Voila le Mod trouvé");
             }
             for (int i = 0; i < files.length; i++) {
-                if (files[i].isFile() == true) {
+                if (files[i].isFile() && files[i].getName().endsWith(".jar")) {
                     listeTest.add("File : " + files[i].getName());
                 }
             }
@@ -124,8 +124,6 @@ public class App_MAJ implements Initializable {
         return false;
     }
 
-
-
     private void deplaceFichier(ActionEvent event) {
         delete(lienDossierModsLoader+info.get(0));
         File src = new File(lienDossierMods);
@@ -137,7 +135,6 @@ public class App_MAJ implements Initializable {
         }
     }
 
-
     public void majButton(ActionEvent event) {
         int result = JOptionPane.showConfirmDialog(null, "<html>Voulez-vous mettre à jour le ModPack '"+info.get(0)+"' ?<html><html><font color='red'><br>(Attention, le dossier ModPack va être réécrit)</font></html>");
 
@@ -145,11 +142,11 @@ public class App_MAJ implements Initializable {
             buttonAccueil.setDisable(true);
             button1.setDisable(true);
             button2.setDisable(true);
+            ListView.setDisable(true);
 
             Task<Void> task = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
-
                     deplaceFichier(event);
                     deleteFilesByExtension(lienDossierModsLoader + info.get(0) +"\\", ".confml");
                     GM_Controller.creerFichier(info.get(0),info.get(1),true);
@@ -175,6 +172,7 @@ public class App_MAJ implements Initializable {
 
                 buttonAccueil.setDisable(false);
                 button1.setDisable(false);
+                ListView.setDisable(false);
 
                 // Réinitialise la barre de progression
                 progressBar.setVisible(false);

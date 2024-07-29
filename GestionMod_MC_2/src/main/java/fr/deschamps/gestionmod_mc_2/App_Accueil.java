@@ -96,7 +96,7 @@ public class App_Accueil implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Select.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
-        stage.setTitle("Chargement ModPack");
+        stage.setTitle("ModLoader - Chargement ModPack");
         stage.setScene(scene);
         stage.show();
     }
@@ -107,7 +107,7 @@ public class App_Accueil implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Create.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
-        stage.setTitle("Création ModPack");
+        stage.setTitle("ModLoader - Création ModPack");
         stage.setScene(scene);
         stage.show();
     }
@@ -118,7 +118,7 @@ public class App_Accueil implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MAJ.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
-        stage.setTitle("Mise à jour d'un MP");
+        stage.setTitle("ModLoader - Mise à jour d'un MP");
         stage.setScene(scene);
         stage.show();
     }
