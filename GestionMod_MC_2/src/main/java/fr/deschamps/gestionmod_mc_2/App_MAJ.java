@@ -151,8 +151,8 @@ public class App_MAJ implements Initializable {
                     deleteFilesByExtension(lienDossierModsLoader + info.get(0) +"\\", ".confml");
                     GM_Controller.creerFichier(info.get(0),info.get(1),true);
                     deleteFilesByExtension(lienDossierMods, ".confml");
-                    //copie du fichier .confml de .mods pour mettre le nouveau de .modsloader
                     System.out.println(lienDossierModsLoader + info.get(0) + ".confml");
+                    //suppression et recréation du confml dans /mods.
                     System.out.println(lienDossierMods + info.get(0) + ".confml");
                     GM_Controller.creerFichier(info.get(0),info.get(1),false);
                     return null;
@@ -169,11 +169,9 @@ public class App_MAJ implements Initializable {
             task.setOnSucceeded(e -> {
                 // Affiche un message de confirmation
                 JOptionPane.showMessageDialog(null, "Mise à jour terminé !");
-
                 buttonAccueil.setDisable(false);
                 button1.setDisable(false);
                 ListView.setDisable(false);
-
                 // Réinitialise la barre de progression
                 progressBar.setVisible(false);
                 progressBar.progressProperty().unbind();
