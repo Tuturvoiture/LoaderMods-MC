@@ -1,6 +1,8 @@
 package fr.deschamps.gestionmod_mc_2;
 
 import fr.deschamps.gestionmod_mc_2.Controller.GM_Controller;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -39,7 +42,9 @@ public class App_Accueil implements Initializable {
     @FXML
     public Button button1, button2, button3;
     @FXML
-    public ImageView img;
+    public ImageView img, loading;
+    @FXML
+    public Pane paneLoading;
 
     List<String> info = GM_Controller.recupInfo();
 
@@ -47,6 +52,7 @@ public class App_Accueil implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Image image = new Image(getClass().getResource("/fr/deschamps/gestionmod_mc_2/images/giphy1.gif").toString());img.setImage(image);
+        Image loadingImage = new Image(getClass().getResource("/fr/deschamps/gestionmod_mc_2/images/loading.gif").toString());loading.setImage(loadingImage);
         afficheCharger();
     }
 
@@ -91,36 +97,53 @@ public class App_Accueil implements Initializable {
     }
 
     public void switchToPage1(ActionEvent event) throws IOException {
-        button1.setDisable(true);
-        button2.setDisable(true);
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Select.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("ModLoader - Chargement ModPack");
-        stage.setScene(scene);
-        stage.show();
+        tache("Chargement ModPack", "Select", event);
     }
 
     public void switchToPage2(ActionEvent event) throws IOException {
-        button1.setDisable(true);
-        button2.setDisable(true);
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Create.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("ModLoader - Création ModPack");
-        stage.setScene(scene);
-        stage.show();
+        tache("Création ModPack", "Create", event);
     }
 
     public void switchToPage3(ActionEvent event) throws IOException {
+        tache("Mise à jour ModPack", "MAJ", event);
+    }
+
+    private void tache(String titre, String fichier, ActionEvent event) {
+        // Afficher l'animation de chargement et désactiver les boutons
+        loading.setVisible(true);
+        paneLoading.setVisible(true);
         button1.setDisable(true);
         button2.setDisable(true);
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MAJ.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("ModLoader - Mise à jour d'un MP");
-        stage.setScene(scene);
-        stage.show();
+        button3.setDisable(true);
+
+        // Démarrer la tâche en arrière-plan
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fichier + ".fxml")));
+
+                // Manipulation de l'UI après chargement de la nouvelle scène
+                Platform.runLater(() -> {
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    stage.setTitle("ModLoader - " + titre);
+                    stage.setScene(scene);
+                    stage.show();
+
+                    // Réactiver les boutons et cacher l'animation de chargement
+                    button1.setDisable(false);
+                    button2.setDisable(false);
+                    button3.setDisable(false);
+                    loading.setVisible(false);
+                    paneLoading.setVisible(false);
+                });
+                return null;
+            }
+        };
+
+        // Démarrer le thread de la tâche
+        new Thread(task).start();
     }
+
 
 }

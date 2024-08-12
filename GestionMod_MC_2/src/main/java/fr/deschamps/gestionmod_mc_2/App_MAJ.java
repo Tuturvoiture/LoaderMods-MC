@@ -34,7 +34,7 @@ import static fr.deschamps.gestionmod_mc_2.Controller.GM_Controller.deleteFilesB
 public class App_MAJ implements Initializable {
 
     @FXML
-    public Label welcomeText, afficheDossierSelectionner;
+    public Label welcomeText, afficheDossierSelectionner,ErreurMessage;
     @FXML
     public ImageView img;
     @FXML
@@ -102,11 +102,15 @@ public class App_MAJ implements Initializable {
     }
 
     private void checkMPDossier(){
-        paneErreur.setVisible(false);
-        String nom = info.get(0);
-        if (!chercheDossierAvecNom(nom)){
-            paneErreur.setVisible(true);
+        paneErreur.setVisible(true);
+        if (!info.isEmpty()) {
+            if (chercheDossierAvecNom(info.get(0))) {
+                paneErreur.setVisible(false);
+            }
+        }else{
+            ErreurMessage.setText("Aucun ModPack chargé actuellement !");
         }
+
     }
 
     private boolean chercheDossierAvecNom(String nom) {
@@ -151,9 +155,7 @@ public class App_MAJ implements Initializable {
                     deleteFilesByExtension(lienDossierModsLoader + info.get(0) +"\\", ".confml");
                     GM_Controller.creerFichier(info.get(0),info.get(1),true);
                     deleteFilesByExtension(lienDossierMods, ".confml");
-                    System.out.println(lienDossierModsLoader + info.get(0) + ".confml");
                     //suppression et recréation du confml dans /mods.
-                    System.out.println(lienDossierMods + info.get(0) + ".confml");
                     GM_Controller.creerFichier(info.get(0),info.get(1),false);
                     return null;
                 }

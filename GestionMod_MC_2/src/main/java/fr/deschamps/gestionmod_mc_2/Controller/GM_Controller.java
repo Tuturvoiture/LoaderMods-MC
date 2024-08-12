@@ -22,14 +22,14 @@ public class GM_Controller {
         if (src.isDirectory()) {
             // Vérifiez si le répertoire est caché et si nous devons le copier ou non
             if (src.getName().startsWith(".") && !copiCachee) {
-                System.out.println("Skipping hidden folder: " + src);
+                //System.out.println("Skipping hidden folder: " + src);
                 return;
             }
 
             // si le répertoire n'existe pas, créez-le
             if (!dest.exists()) {
                 dest.mkdir();
-                System.out.println("Dossier " + src + "  > " + dest);
+                //System.out.println("Dossier " + src + "  > " + dest);
             }
 
             // lister le contenu du répertoire
@@ -185,13 +185,13 @@ public class GM_Controller {
         try {
 
             if (file.createNewFile()) {
-                System.out.println("Fichier créé : " + file.getName());
+                //System.out.println("Fichier créé : " + file.getName());
                 Files.write(file.toPath(), lignes, StandardCharsets.UTF_8);
             } else {
-                System.out.println("Fichier déjà existant.");
+                //System.out.println("Fichier déjà existant.");
             }
         } catch (IOException e) {
-            System.out.println("Erreur lors de la création du fichier.");
+            //System.out.println("Erreur lors de la création du fichier.");
             e.printStackTrace();
         }
     }

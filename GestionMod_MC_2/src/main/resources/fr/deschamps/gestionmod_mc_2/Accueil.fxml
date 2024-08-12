@@ -81,5 +81,10 @@
             </Button>
          </children>
       </Pane>
+      <Pane fx:id="paneLoading" focusTraversable="true" opacity="0.86" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #B8B6B6;" visible="false">
+         <children>
+            <ImageView fx:id="loading" fitHeight="200.0" fitWidth="200.0" layoutX="200.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

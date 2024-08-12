@@ -68,7 +68,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="167.0" layoutY="165.0" prefHeight="43.0" prefWidth="283.0" text="Le dossier contenant le Modpack à peu-être été supprimé ou n'a pas été crée sur cette machine" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+                  <Label fx:id="ErreurMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="167.0" layoutY="165.0" prefHeight="43.0" prefWidth="283.0" text="Le dossier contenant le Modpack à peu-être été supprimé ou n'a pas été crée sur cette machine" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="167.0" layoutY="257.0" prefHeight="43.0" prefWidth="283.0" text="Veuillez passer par la page création pour crée un nouveau Modpack" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
                   <Button fx:id="button3" layoutX="264.0" layoutY="310.0" mnemonicParsing="false" onAction="#switchToPage2" text="Page création" />
                </children>
