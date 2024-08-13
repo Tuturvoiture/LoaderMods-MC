@@ -116,6 +116,7 @@ public class App_Accueil implements Initializable {
         button2.setDisable(true);
         button3.setDisable(true);
 
+
         // Démarrer la tâche en arrière-plan
         Task<Void> task = new Task<Void>() {
             @Override

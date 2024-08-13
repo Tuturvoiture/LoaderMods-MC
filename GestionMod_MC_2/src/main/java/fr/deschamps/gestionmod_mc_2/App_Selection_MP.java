@@ -47,7 +47,6 @@ public class App_Selection_MP implements Initializable {
         actualiseList();
         //Image image = new Image(getClass().getResource("/fr/deschamps/gestionmod_mc_2/images/giphy3.gif").toString());img.setImage(image);
         button2.setDisable(true);
-        System.out.println("User : "+User);
     }
 
     public static void copy(File src, File dest,boolean aaa) throws IOException {
