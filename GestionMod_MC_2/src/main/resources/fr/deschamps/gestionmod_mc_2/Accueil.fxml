@@ -71,7 +71,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="textModif" alignment="CENTER" layoutX="20.0" layoutY="324.0" text="Attention, Modification externe détecté" textAlignment="CENTER" textFill="#a60404" visible="false" />
+                  <Label fx:id="textModif" alignment="CENTER" layoutX="12.0" layoutY="324.0" prefHeight="17.0" prefWidth="222.0" text="Attention, Modification externe détectée" textAlignment="CENTER" textFill="#a60404" visible="false" />
                </children>
             </Pane>
             <Button fx:id="button3" layoutX="300.0" layoutY="273.0" mnemonicParsing="false" onAction="#switchToPage3" prefHeight="88.0" prefWidth="276.0" text="Mettre à jour le MP">
