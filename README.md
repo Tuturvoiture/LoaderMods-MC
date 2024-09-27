@@ -1,7 +1,7 @@
 
 # LoaderMods-MC
 
-LoaderMods MC est une application dédiée à la gestion des mods pour Minecraft. Elle simplifie la gestion de vos mods pour toutes vos parties, vous évitant ainsi de naviguer dans les dossiers du jeu.
+LoaderMods MC est une application dédiée à la gestion des mods pour Minecraft en local. Elle simplifie la gestion de vos mods pour toutes vos parties, vous évitant ainsi de naviguer dans les dossiers du jeu.
 
 * Facilité de gestion des mods
 * Sauvegarde des mods
